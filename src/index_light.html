@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Knight Rider Effect</title>
+    <style>
+        h1 {
+            position: relative;
+            text-align: center;
+            top: 100px;
+            font-size: 50px;
+            font-family: "DejaVu Sans";
+        }
+        section {
+            margin-top: 280px !important;
+            display: flex;
+            margin: 0 auto;
+            width: 1250px;
+            height: 100px;
+            border-bottom: 2px solid black;
+            border-top: 2px solid black;
+        }
+        section > div {
+            margin: 25px 10px 0 10px;
+            height: 50px;
+            width: 200px;
+            background-color: #ddd; 
+        }
+        .btn {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            width: 200px;
+            margin: 0 auto;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            margin-top: 50px;
+        }
+        button {
+            width: 100px;
+            height: 50px;
+            font-size: 20px;
+            font-family: "DejaVu Sans";
+            
+        }
+    </style>
+</head>
+<body>
+<section>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</section>
+
+<div class="btn">
+    <button onclick="stop()">Stop</button>
+    <button onclick="start()">Start</button>
+</div>
+
+<script>
+    let currentIndex = 0;
+    let direction = 1; 
+    const divs = document.querySelectorAll("section > div");
+    let intervalId;
+
+
+    function knightRider() {
+        divs.forEach(div => div.style.backgroundColor = "#ddd"); 
+        divs[currentIndex].style.backgroundColor = "red"; 
+
+
+        currentIndex += direction;
+
+        if (currentIndex === divs.length - 1 || currentIndex === 0) {
+            direction *= -1;
+        }
+    }
+
+    function start() {
+        if (!intervalId) {
+            intervalId = setInterval(knightRider, 100);
+        }
+    }
+
+    function stop() {
+        clearInterval(intervalId); 
+        intervalId = null; 
+        divs.forEach(div => div.style.backgroundColor = "#ddd");
+        divs[currentIndex].style.backgroundColor= "red"
+
+    }
+</script>
+</body>
+</html>
